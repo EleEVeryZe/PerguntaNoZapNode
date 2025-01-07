@@ -3,7 +3,7 @@ import axios from "axios";
 import Question from "../src/services/questionService";
 
 jest.mock("axios");
-const NUMBER_ID = "+5541832990";
+const NUMBER_ID = "553195365338@c.us";
 
 describe("Questions", () => {
 	let questionService: Question;

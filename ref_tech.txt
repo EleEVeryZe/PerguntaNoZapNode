@@ -1,3 +1,8 @@
-1. Change whatsAppClient to callDevice
-2. Create class QuestionAPI and move APICalls to there and inject it in questionService
-3. Refactor method interateQuestions
+V2:
+* Envio do resultado das perguntas para o telefone cadastrado
+    * Add attr stopConversation from API, which then stops the stopConversation
+    * in here: src\main\java\com\demo\account\domain\services\questions\Question.java, store the answer in memory
+    * Send orderingBrief to registered cellphone
+    * Create HamburgeriaGame and make it pretty to be shown
+V3
+* Enviar imagemvpn

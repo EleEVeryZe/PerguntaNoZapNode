@@ -22,6 +22,7 @@ export default class QuestionAPI {
             console.log("FINISH call");
             return response.data;
         } catch (err) {
+            
             console.log("Bussiness server is probably down");
             throw err;
         }
@@ -30,15 +31,15 @@ export default class QuestionAPI {
     
 	answer = (questionId: string) => {
 		return {
-			with: async (answer: string) => {
+			with: async (text: string) => {
 				try {
                     console.log("START: call answer endpoint with ", {
                         numberId: this.numberId,
-                        answer,
+                        text,
                         questionId,
                     }); //TODO: implement a better logging library
-                    const result = await axiosInstance.post(`http://localhost:3003/answer/BIG_BALL/${this.numberId}`, {
-                        answer,
+                    const result = await axiosInstance.post(`http://localhost:3003/answer/${this.gameType}/${this.numberId}`, {
+                        text,
                         questionId: parseInt(questionId)
                     }); //TODO: remove hardcoded url
                     console.log("FINISH call");

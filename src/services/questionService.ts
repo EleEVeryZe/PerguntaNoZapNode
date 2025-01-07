@@ -6,13 +6,11 @@ interface IQuestion {
 	text: string;
 }
 
-const instancesOfQuestion: Question[] = [];
-export const getQuestion = (gameType: GAME_TYPES, numberId: string, client: any) => {
+export const getQuestion = (instancesOfQuestion: Question[]) => (gameType: GAME_TYPES, numberId: string, client: any) => {
 	const oldQuestion = instancesOfQuestion.find((qst) => qst.numberId == numberId);
 	if (!oldQuestion) {
 		const newQuestion = new Question(gameType, numberId, client);
 		instancesOfQuestion.push(newQuestion);
-
 		return newQuestion;
 	}
 
@@ -70,6 +68,6 @@ export default class Question {
 	private readonly getErrorMsg = (err: any) => {
 		const msg = err?.response?.data?.errMsg;
 
-		return msg ? msg : "";
+		return msg ?? "";
 	};
 }

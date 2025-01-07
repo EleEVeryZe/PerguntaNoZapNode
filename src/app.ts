@@ -30,7 +30,7 @@ client.on("ready", () => {
 });
 
 client.on("message", async (msg: any) => {
-	const question: Question = getQuestion("BIG_BALL", msg.from, msg);
+	const question: Question = getQuestion([])("BIG_BALL", msg.from, msg);
 	try {
 		await question.interateQuestions(msg.body);
 	} catch (err) {
@@ -45,7 +45,7 @@ function askQuestion(query: any) {
 }
 
 const cmdInterface = async () => {
-	const question: Question = getQuestion("BIG_BALL", "111", {
+	const question: Question = getQuestion([])("RAMAL", "111", {
 		reply: async (msg: string) => {
 			const resposta = await askQuestion(msg);
 			await question.interateQuestions(resposta as string);

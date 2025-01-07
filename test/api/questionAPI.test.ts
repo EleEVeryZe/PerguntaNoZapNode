@@ -4,7 +4,7 @@ import axios from "axios";
 import QuestionAPI from "../../src/api/questionAPI";
 
 jest.mock("axios");
-const NUMBER_ID = "+5541832990";
+const NUMBER_ID = "553195365338@c.us";
 
 describe("QuestionAPI", () => {
     let questionAPISut: QuestionAPI;
