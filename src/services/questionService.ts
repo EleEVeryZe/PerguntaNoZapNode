@@ -1,34 +1,24 @@
 import QuestionAPI from "../api/questionAPI";
-import GAME_TYPES from "../types/gameType";
+import { GAME_TYPES, QuestionAPIType } from "../types/gameType";
+import { singleton } from "./singleton";
 
 interface IQuestion {
 	id: string;
 	text: string;
 }
 
-export const getQuestion = (instancesOfQuestion: Question[]) => (gameType: GAME_TYPES, numberId: string, client: any) => {
-	const oldQuestion = instancesOfQuestion.find((qst) => qst.numberId == numberId);
-	if (!oldQuestion) {
-		const newQuestion = new Question(gameType, numberId, client);
-		instancesOfQuestion.push(newQuestion);
-		return newQuestion;
-	}
-
-	return oldQuestion;
-};
-
-export default class Question {
+class Question {
 	question: IQuestion | undefined;
 	numberId: string;
 	gameType: GAME_TYPES;
 	callDevice: any;
-	questionAPI: QuestionAPI;
+	questionAPI: QuestionAPIType;
 
-	constructor(gameType: GAME_TYPES, numberId: string, callDevice: any) {
+	constructor({ gameType, numberId, callDevice } : { gameType: GAME_TYPES, numberId: string, callDevice: any }) {
 		this.gameType = gameType;
 		this.numberId = numberId;
 		this.callDevice = callDevice;
-		this.questionAPI = new QuestionAPI(numberId, gameType);
+		this.questionAPI = QuestionAPI.call(this, numberId, gameType);
 	}
 
 	interateQuestions = async (answer: string) => {
@@ -71,3 +61,5 @@ export default class Question {
 		return msg ?? "";
 	};
 }
+
+export default singleton(Question);
